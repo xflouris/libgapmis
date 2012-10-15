@@ -1,0 +1,153 @@
+.TH gapmis 3 "15 Oct 2012" "libgapmis 0.0.9" "libgapmis manual"
+.SH NAME
+libgapmis - a library for pairwise short-read single-gap alignment
+.SH SYNOPSIS
+.nf
+.B #include <gapmis.h>
+.sp
+.BI "unsigned int gapmis_one_to_one ( const char *" p ", const char *" t ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapmis_one_to_one_scr ( const char *" p ", const char *" t ", const struct gapmis_params *" in ", double *" scr " );"
+.br
+.BI "unsigned int gapmis_results_one_to_one ( const char *" filename ", const char *" p ", const char *" p_header ", const char *" t ", const char *" t_header ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapmis_one_to_many ( const char *" p ", const char **" t ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapmis_one_to_many_opt ( const char *" p ", const char **" t ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapmis_one_to_many_opt_sse ( const char *" p ", const char **" t ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapmis_one_to_many_opt_gpu ( const char *" p ", const char **" t ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapmis_results_one_to_many ( const char *" filename ", const char *" p ", const char *" p_header ", const char **" t ", const char **" t_header ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapmis_many_to_many ( const char **" p ", const char **" t ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapmis_many_to_many_opt ( const char **" p ", const char **" t ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapmis_many_to_many_opt_sse ( const char **" p ", const char **" t ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapmis_many_to_many_opt_gpu ( const char **" p ", const char **" t ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapmis_results_many_to_many ( const char *" filename ", const char **" p ", const char **" p_header ", const char **" t ", const char **" t_header ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapsmis_one_to_one ( const char *" p ", const char *" t ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapsmis_one_to_one_scr ( const char *" p ", const char *" t ", const struct gapmis_params *" in ", double *" scr " );"
+.br
+.BI "unsigned int gapsmis_one_to_one_onf ( const char *" p ", const char *" t ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.br
+.BI "unsigned int gapsmis_results_one_to_one ( const char *" filename ", const char *" p ", const char *" p_header ", const char *" t ", const char *" t_header ", const struct gapmis_params *" in ", struct gapmis_align *" out " );"
+.sp
+.fi
+.SH DESCRIPTION
+The functions in the
+.BR libgapmis
+library compute the optimal semi-global single-gap alignment(s) between a string (or a set of 
+strings) representing the pattern(s) and a string (or a set of 
+strings) representing the text(s). 
+.PP
+The function \fBgapmis_one_to_one\fP() computes the optimal semi-global single-gap alignment
+between a single pattern string \fIp\fP and a text string \fIt\fP. The
+alignment is done according to the parameters specified by \fIin\fP and
+the resulting alignment is stored in \fIout\fP.
+.PP
+The function \fBgapmis_one_to_one_scr\fP() computes only the score of the optimal semi-global single-gap alignment
+between a single pattern string \fIp\fP and a text string \fIt\fP. The
+alignment is done according to the parameters specified by \fIin\fP and
+the resulting score is stored in \fIscr\fP.
+.PP
+The function \fBgapmis_results_one_to_one\fP() prints details of the alignment computed by function \fBgapmis_one_to_one\fP() in file \fIfilename\fP.
+.PP
+The function \fBgapmis_one_to_many\fP() computes the optimal semi-global singe-gap alignments
+between a single pattern string \fIp\fP and a set of text strings \fIt\fP. The
+alignment is done according to the parameters specified by \fIin\fP and
+the resulting alignments are stored in \fIout\fP.
+.PP
+The function \fBgapmis_one_to_many_opt\fP() computes the optimal semi-global single-gap alignment with the maximum score
+between a single pattern string \fIp\fP and a set of text strings \fIt\fP. The
+alignment is done according to the parameters specified by \fIin\fP and
+the resulting alignments are stored in \fIout\fP. The accelerated SSE- and GPU-based versions
+of \fBgapmis_one_to_many_opt\fP() are \fBgapmis_one_to_many_opt_sse\fP() 
+and \fBgapmis_one_to_many_opt_gpu\fP(), respectively.
+.PP
+The function \fBgapmis_results_one_to_many\fP() prints details of the alignments computed by function \fBgapmis_one_to_many\fP() in file \fIfilename\fP.
+.PP
+The function \fBgapmis_many_to_many\fP() computes the optimal semi-global single-gap alignments
+between a set of pattern strings \fIp\fP and a set of text strings \fIt\fP. The
+alignment is done according to the parameters specified by \fIin\fP and
+the resulting alignments are stored in \fIout\fP.
+.PP
+The function \fBgapmis_many_to_many_opt\fP() computes the optimal semi-global single-gap alignments with the maximum score
+between each pattern from a set of pattern strings \fIp\fP and a set of text strings \fIt\fP. The
+alignment is done according to the parameters specified by \fIin\fP and
+the resulting alignments are stored in \fIout\fP. The accelerated SSE- and GPU-based versions
+of \fBgapmis_many_to_many_opt\fP() are \fBgapmis_many_to_many_opt_sse\fP() 
+and \fBgapmis_many_to_many_opt_gpu\fP(), respectively.
+.PP
+The function \fBgapmis_results_many_to_many\fP() prints details of the alignments computed by function \fBgapmis_many_to_many\fP() in file \fIfilename\fP.
+.PP
+The function \fBgapsmis_one_to_one\fP() computes a semi-global alignment
+between of a single pattern string \fIp\fP and a text string \fIt\fP. 
+By splitting the pattern into several fragments the user can identify multiple gaps in the alignment---a single-gap alignment per fragment is performed.
+The alignment for each fragment is done according to the parameters specified by \fIin\fP, where the number of fragments can be specified, and
+the resulting alignment is stored in \fIout\fP.
+.PP
+The function \fBgapsmis_one_to_one_scr\fP() computes only the total score of the semi-global alignment
+between a single pattern string \fIp\fP and a text string \fIt\fP.
+The alignment for each fragment is done according to the parameters specified by \fIin\fP and
+the resulting total score is stored in \fIscr\fP.
+.PP
+The function \fBgapsmis_one_to_one_onf\fP() computes the optimal semi-global alignment
+between a number of fragments of a single pattern string \fIp\fP and a text string \fIt\fP by splitting the pattern into the optimal number
+of fragments. The optimal number of fragments is the number of fragments resulting in the higher score.
+The alignment for each fragment is done according to the parameters specified by \fIin\fP, where the maximum number of fragments can be specified, and
+the resulting alignment is stored in \fIout\fP.
+.PP
+The function \fBgapsmis_results_one_to_one\fP() prints details of the alignments computed by function \fBgapsmis_one_to_one\fP() or by function \fBgapsmis_one_to_one_onf\fP() in file \fIfilename\fP.
+.PP
+The structure \fIgapmis_params\fP passed for the \fIin\fP argument is defined as:
+.in +4n
+.nf
+
+struct \fIgapmis_params\fP {
+    unsigned int  \fImax_gap\fP;
+    unsigned int  \fIscoring_matrix\fP;
+    double        \fIgap_open_pen\fP;
+    double        \fIgap_extend_pen\fP;
+    unsigned int  \fInum_frags\fP;
+}
+
+.fi
+.in
+The maximum allowed length of gap is specified in \fImax_gap\fP, the 
+\fIscoring_matrix\fP can be either EDNAFULL or EBLOSUM62. The gap open
+penalty and gap extension penalty are specified by \fIgap_open_pen\fP
+and \fIgap_extend_pen\fP, respectively. The number of fragments is
+specified by \fInum_frags\fP, and it is used only in functions \fBgapsmis_one_to_one\fP(),
+\fBgapsmis_one_to_one_scr\fP(), and \fBgapsmis_one_to_one_onf\fP(). In function
+\fBgapsmis_one_to_one_onf\fP() \fInum_frags\fP specifies the maximum number
+of fragments.
+.PP
+The structure \fIgapmis_align\fP passed for the \fIout\fP argument is defined as:
+.in +4n
+.nf
+
+struct \fIgapmis_align\fP {
+    double        \fImax_score\fP;
+    unsigned int  \fImin_gap\fP;
+    unsigned int  \fIwhere\fP;
+    unsigned int  \fIgap_pos\fP;
+    unsigned int  \fInum_mis\fP;
+}
+
+.fi
+.in
+The computed optimal alignment consists of the maximum score \fImax_score\fP, 
+the length of the gap \fImin_gap\fP, the location of the gap \fIwhere\fP
+(0 if the gap occurs in the pattern, 1 if it occurs in the text),
+the starting position of the gap \fIgap_pos\fP, and the number of detected
+mismatches \fInum_mis\fP. In the case of single-gap alignment per fragment, 
+an array \fIout\fP of \fIgapmis_align\fP structs is returned, each containing 
+the starting position of the gap \fIgap_pos\fP and the number of detected 
+mismatches \fInum_mis\fP relatively to the respective fragment.

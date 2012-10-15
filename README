@@ -1,0 +1,15 @@
+libgapmis is an ultrafast library for pairwise short-read alignment, based on
+GapMis, including accelerated SSE-based and GPU-based versions. For more
+information visit http://sco.h-its.org/exelixis/gapmis/.
+
+For installation instructions check the file INSTALL.
+
+To use the library on general-purpose CPUs, include gapmis.h and link using
+-lgapmis. You may link with -lgapmis -static to statically link the library
+to your binary. In case of a dynamic linkage, specify the library path in
+$LD_RUN_PATH or $LD_LIBRARY_PATH.
+
+To use the library on CPUs with SSE instruction set, include gapmis.h and link 
+using -lgapmis_cpu -lgapmis_sse. To use the library on GPUs, include gapmis.h 
+and link using -lgapmis_cpu -lgapmis_gpu. The same notes for static and dynamic
+linkage apply for both optimised versions.

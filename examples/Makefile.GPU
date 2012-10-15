@@ -1,0 +1,11 @@
+CC  = gcc
+CFLAGS = -g -Wall -D_USE_GPU -msse3 -O3 -fomit-frame-pointer -funroll-loops -lOpenCL 
+OFLAGS = -lgapmis -lgapmis_gpu -static
+
+all: example-1
+
+example-1: example-1.c
+	$(CC) $(CFLAGS) $+ -o $@ $(OFLAGS)
+
+clean:
+	rm -f example-1

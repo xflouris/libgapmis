@@ -1,0 +1,11 @@
+CC  = gcc
+CFLAGS = -g -Wall -msse3 -O3 -fomit-frame-pointer -funroll-loops  
+
+all: example-1
+
+example-1: example-1.c EDNAFULL.h EBLOSUM62.h
+	$(CC) $(CFLAGS) $+ -o $@ -lgapmis -static
+
+clean:
+	rm -f example-1 *~ 
+

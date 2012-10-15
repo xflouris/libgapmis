@@ -1,0 +1,12 @@
+CC  = gcc
+
+CFLAGS = -Wall -O3 -D_USE_SSE
+OFLAGS = -lstdc++ -lpthread -lgapmis -lgapmis_sse -static
+
+all: example-1
+
+example-1: example-1.c
+	$(CC) $(CFLAGS) $+ -o $@ $(OFLAGS)
+
+clean:
+	rm example-1
